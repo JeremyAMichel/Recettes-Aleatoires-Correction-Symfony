@@ -9,4 +9,38 @@
 			Recette Aléatoire
 		</h1>
 	</div>
+	
+	<div class="flex justify-center mt-8">
+        <h2 class="text-center text-4xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
+            {{ recipe.name }}
+        </h2>
+    </div>
+	<div class="flex justify-center mt-4">
+        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
+            Ingrédients
+        </h3>
+    </div>
+    <div class="flex justify-center mt-4">
+        <ul class="list-disc list-inside">
+            {% for ingredient in recipe.ingredients %}
+                <li class="text-slate-400">{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="flex justify-center mt-4">
+        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
+            Temps de préparation : {{ recipe.preparationTime }}
+        </h3>
+    </div>
+    <div class="flex justify-center mt-4">
+        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
+            Temps de cuisson : {{ recipe.cookingTime }}
+        </h3>
+    </div>
+    <div class="flex justify-center mt-4">
+        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
+            Sert : {{ recipe.serves }} personnes
+        </h3>
+    </div>
+
 {% endblock %}
