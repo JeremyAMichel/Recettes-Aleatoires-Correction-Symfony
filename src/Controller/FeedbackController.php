@@ -11,6 +11,12 @@ class FeedbackController extends AbstractController
     #[Route('/feedback', name: 'app_feedback')]
     public function index(): Response
     {
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+
         return $this->render('feedback/index.html.twig', [
             'controller_name' => 'FeedbackController',
         ]);
