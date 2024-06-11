@@ -6,7 +6,7 @@
 
 	<div class="flex min-h-screen flex-col justify-center items-center px-6 lg:px-8">
 		<div class="sm:mx-auto sm:w-full sm:max-w-sm">
-			<h1 class="text-center text-4xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">Connexion</h1>
+			<h1 class="text-center text-4xl font-bold text-indigo-500 font-sans leading-9 tracking-tight">Connexion</h1>
 		</div>
 
 		<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -27,7 +27,7 @@
 					<div class="flex items-center justify-between">
 						<label for="password" class="block text-sm font-medium leading-6 text-slate-400">Mot de passe</label>
 						<div class="text-sm">
-							<a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Mot de passe oublié?</a>
+							<a href="#" class="font-semibold text-indigo-500 hover:text-indigo-500">Mot de passe oublié?</a>
 						</div>
 					</div>
 					<div class="mt-2">
@@ -36,7 +36,7 @@
 				</div>
 
 				<div>
-					<button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se connecter</button>
+					<button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se connecter</button>
 				</div>
 
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
@@ -44,7 +44,7 @@
 
 			<p class="mt-10 text-center text-sm text-gray-500">
 				Vous n'êtes pas membre ?
-				<a href="{{ path('app_register') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Inscrivez-vous gratuitement !</a>
+				<a href="{{ path('app_register') }}" class="font-semibold leading-6 text-indigo-500 hover:text-indigo-500">Inscrivez-vous gratuitement !</a>
 			</p>
 		</div>
 	</div>

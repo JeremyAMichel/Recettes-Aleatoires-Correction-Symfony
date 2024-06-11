@@ -5,7 +5,7 @@
 
 {% block body %}
 	<div class="flex justify-center mt-32">
-		<h1 class="text-center text-4xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
+		<h1 class="text-center text-4xl font-bold text-indigo-500 font-sans leading-9 tracking-tight">
 			Recette Aléatoire
 		</h1>
 	</div>
@@ -29,7 +29,7 @@
 					<div class="grid grid-cols-2 gap-2">
 						{% for ingredient in recipe['ingredients'] %}
 							<dd class="mt-2 text-sm text-slate-400 flex items-center gap-1">
-								<svg class="h-6 w-5 flex-none text-indigo-600" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+								<svg class="h-6 w-5 flex-none text-indigo-500" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
 									<path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
 								</svg>
 								{{ ingredient }}</dd>
@@ -47,7 +47,7 @@
 				<div class="border-t border-gray-200 pt-4">
 					<dt class="font-medium text-slate-300">Feedback</dt>
 					<dd class="mt-2 text-sm text-slate-400">
-						<button class="bg-indigo-600 hover:bg-indigo-800 text-slate-200 font-bold py-2 px-4 rounded">J'ai finis cette recette !</button>
+						<button class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">J'ai finis cette recette !</button>
 					</dd>
 				</div>
 			</dl>
