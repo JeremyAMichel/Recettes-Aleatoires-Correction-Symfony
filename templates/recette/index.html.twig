@@ -47,8 +47,50 @@
 				<div class="border-t border-gray-200 pt-4">
 					<dt class="font-medium text-slate-300">Feedback</dt>
 					<dd class="mt-2 text-sm text-slate-400">
-						<button class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">J'ai finis cette recette !</button>
+						<button id="openModalButton" class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">J'ai finis cette recette !</button>
 					</dd>
+
+					{# Feedback Modal #}
+					<div id="modal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+						<div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+								<div class="fixed inset-0 bg-gray-950 bg-opacity-80 transition-opacity" aria-hidden="true"></div>
+							<span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+							<div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+								<button id="closeModalButton" type="button" class="absolute right-4 top-4 text-gray-400 hover:text-gray-500">
+									<span class="sr-only">Close</span>
+									<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+									</svg>
+								</button>
+								
+								
+								<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+									<h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+										Laissez un commentaire et une note
+									</h3>
+									<div>
+										<textarea class="w-full h-20 p-2 mt-2 border rounded-md" placeholder="Votre commentaire..."></textarea>
+										<input class="w-full mt-2 p-2 border rounded-md" type="number" min="1" max="5" placeholder="Votre note (1-5)">
+									</div>
+								</div>
+								<div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+									{# ajouter bouton pour envoyer #}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<script>
+						// JavaScript to open and close the feedback modal
+						document.getElementById('openModalButton').addEventListener('click', function () {
+							document.getElementById('modal').classList.remove('hidden');
+						});
+
+						document.getElementById('closeModalButton').addEventListener('click', function () {
+							document.getElementById('modal').classList.add('hidden');
+						});
+					</script>
+
 				</div>
 			</dl>
 		</div>
