@@ -1,15 +1,20 @@
 <?php
+
 namespace App\Service;
 
+use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class RecipeService
 {
-    private $recipeRepository;
+    private RecipeRepository $recipeRepository;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(RecipeRepository $recipeRepository)
+    public function __construct(RecipeRepository $recipeRepository, EntityManagerInterface $entityManager)
     {
         $this->recipeRepository = $recipeRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function getRandomRecipeAsArray(): array
@@ -23,5 +28,15 @@ class RecipeService
         return $randomRecipe->toArray();
     }
 
+    public function createRecipe(array $data)
+    {
+        $recipe = new Recipe();
+        $recipe->setName($data['name']);
+        $recipe->setIngredients($data['ingredients']);
+        $recipe->setPreparationTime($data['preparationTime']);
+        $recipe->setCookingTime($data['cookingTime']);
+        $recipe->setServes($data['serves']);
 
+        $this->entityManager->persist($recipe);
+    }
 }

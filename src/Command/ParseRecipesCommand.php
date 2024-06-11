@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Recipe;
+use App\Service\RecipeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -16,11 +17,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ParseRecipesCommand extends Command
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
+    private RecipeService $recipeService;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, RecipeService $recipeService)
     {
         $this->entityManager = $entityManager;
+        $this->recipeService = $recipeService;
 
         parent::__construct();
     }
@@ -30,22 +33,32 @@ class ParseRecipesCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $json = file_get_contents(__DIR__ . '/../../data/recipes.json');
+        if ($json === false) {
+            $io->error('Failed to read the JSON file.');
+    
+            return Command::FAILURE;
+        }
+
         $data = json_decode($json, true);
+        if ($data === null) {
+            $io->error('Failed to parse the JSON file.');
+    
+            return Command::FAILURE;
+        }
 
         if (isset($data['recipes'])) {
 
             foreach ($data['recipes'] as $item) {
+                if (!isset($item['name'], $item['ingredients'], $item['preparationTime'], $item['cookingTime'], $item['serves'])) {
+                    $io->warning('A recipe is missing some required data and has been skipped.');
+    
+                    continue;
+                }
+
                 // Vérifie si une recette avec le même nom existe déjà
                 $existingRecipe = $this->entityManager->getRepository(Recipe::class)->findOneBy(['name' => $item['name']]);
                 if (!$existingRecipe) {
-                    $recipe = new Recipe();
-                    $recipe->setName($item['name']);
-                    $recipe->setIngredients($item['ingredients']);
-                    $recipe->setPreparationTime($item['preparationTime']);
-                    $recipe->setCookingTime($item['cookingTime']);
-                    $recipe->setServes($item['serves']);
-
-                    $this->entityManager->persist($recipe);
+                    $this->recipeService->createRecipe($item);
                 } else {
                     $io->note(sprintf('La recette "%s" existe déjà, elle n\'a pas été insérée à nouveau.', $item['name']));
                 }

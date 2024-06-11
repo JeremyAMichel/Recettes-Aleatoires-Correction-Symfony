@@ -9,38 +9,47 @@
 			Recette Aléatoire
 		</h1>
 	</div>
-	
-	<div class="flex justify-center mt-8">
-        <h2 class="text-center text-4xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
-            {{ recipe.name }}
-        </h2>
-    </div>
-	<div class="flex justify-center mt-4">
-        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
-            Ingrédients
-        </h3>
-    </div>
-    <div class="flex justify-center mt-4">
-        <ul class="list-disc list-inside">
-            {% for ingredient in recipe.ingredients %}
-                <li class="text-slate-400">{{ ingredient }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="flex justify-center mt-4">
-        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
-            Temps de préparation : {{ recipe.preparationTime }}
-        </h3>
-    </div>
-    <div class="flex justify-center mt-4">
-        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
-            Temps de cuisson : {{ recipe.cookingTime }}
-        </h3>
-    </div>
-    <div class="flex justify-center mt-4">
-        <h3 class="text-center text-2xl font-bold text-indigo-600 font-sans leading-9 tracking-tight">
-            Sert : {{ recipe.serves }} personnes
-        </h3>
-    </div>
+
+	<div class="mx-auto max-w-2xl items-center gap-x-8 gap-y-16 px-4 sm:px-6 lg:max-w-7xl lg:grid-cols-2 lg:px-8 mt-20">
+		<div>
+			<h2 class="text-center text-3xl font-bold tracking-tight text-slate-300 sm:text-3xl">Spécifications</h2>
+			<p class="mt-4 text-center text-slate-400">Une recette gourmande et généreuse ! on vous explique ce qu'il faut pour la réaliser...</p>
+
+			<dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+				<div class="border-t border-gray-200 pt-4">
+					<dt class="font-medium text-slate-300">Nom de la recette</dt>
+					<dd class="mt-2 text-sm text-slate-400">{{ recipe['name'] }}</dd>
+				</div>
+				<div class="border-t border-gray-200 pt-4">
+					<dt class="font-medium text-slate-300">Temps de préparation</dt>
+					<dd class="mt-2 text-sm text-slate-400">{{ recipe['preparationTime'] }}</dd>
+				</div>
+				<div class="border-t border-gray-200 pt-4">
+					<dt class="font-medium text-slate-300">Ingrédients</dt>
+					<div class="grid grid-cols-2 gap-2">
+						{% for ingredient in recipe['ingredients'] %}
+							<dd class="mt-2 text-sm text-slate-400 flex items-center gap-1">
+								<svg class="h-6 w-5 flex-none text-indigo-600" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+									<path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+								</svg>
+								{{ ingredient }}</dd>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="border-t border-gray-200 pt-4">
+					<dt class="font-medium text-slate-300">Temps de cuisson</dt>
+					<dd class="mt-2 text-sm text-slate-400">{{ recipe['cookingTime'] }}</dd>
+				</div>
+				<div class="border-t border-gray-200 pt-4">
+					<dt class="font-medium text-slate-300">Nombre de personnes</dt>
+					<dd class="mt-2 text-sm text-slate-400">{{ recipe['serves'] }}</dd>
+				</div>
+				<div class="border-t border-gray-200 pt-4">
+					<dt class="font-medium text-slate-300">Feedback</dt>
+					<dd class="mt-2 text-sm text-slate-400">Made from natural materials. Grain and color vary with each item.</dd>
+				</div>
+			</dl>
+		</div>
+	</div>
 
 {% endblock %}
