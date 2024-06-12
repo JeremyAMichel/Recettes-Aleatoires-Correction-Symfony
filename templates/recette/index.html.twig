@@ -10,7 +10,7 @@
 		</h1>
 	</div>
 
-	<div class="mx-auto max-w-2xl items-center gap-x-8 gap-y-16 px-4 sm:px-6 lg:max-w-7xl lg:grid-cols-2 lg:px-8 mt-20">
+	<div class="mx-auto max-w-2xl items-center gap-x-8 gap-y-16 px-4 sm:px-6 lg:max-w-7xl lg:grid-cols-2 lg:px-8 mt-14">
 		<div>
 			<h2 class="text-center text-3xl font-bold tracking-tight text-slate-300 sm:text-3xl">Spécifications</h2>
 			<p class="mt-4 text-center text-slate-400">Une recette gourmande et généreuse ! on vous explique ce qu'il faut pour la réaliser...</p>
@@ -45,8 +45,13 @@
 					<dd class="mt-2 text-sm text-slate-400">{{ recipe['serves'] }}</dd>
 				</div>
 				<div class="border-t border-gray-200 pt-4">
-					<dt class="font-medium text-slate-300">Feedback</dt>
-					<dd class="mt-2 text-sm text-slate-400">
+					{# <dt class="font-medium text-slate-300">Feedback</dt> #}
+					{% for message in app.flashes('success_feedback') %}
+						<div class="text-lime-500 mb-2">
+							{{ message }}
+						</div>
+					{% endfor %}
+					<dd class="text-sm text-slate-400">
 						<button id="openModalButton" class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">J'ai finis cette recette !</button>
 					</dd>
 
@@ -74,7 +79,7 @@
 									</div>
 								</div>
 								<div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-									<button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+									<button type="submit" class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 										Envoyer
 									</button>
 								</div>
@@ -86,7 +91,7 @@
 					<script>
 						// JavaScript to open and close the feedback modal
 
-						document.addEventListener('DOMContentLoaded', function() {
+						document.addEventListener('turbo:load', function() {
 							const openModalButton = document.getElementById('openModalButton');
 							const closeModalButton = document.getElementById('closeModalButton');
 							const modal = document.getElementById('modal');

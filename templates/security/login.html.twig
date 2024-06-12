@@ -5,6 +5,11 @@
 {% block body %}
 
 	<div class="flex min-h-screen flex-col justify-center items-center px-6 lg:px-8">
+		{% for message in app.flashes('error_feedback') %}
+			<div class="text-red-500 mb-10">
+				{{ message }}
+			</div>
+		{% endfor %}
 		<div class="sm:mx-auto sm:w-full sm:max-w-sm">
 			<h1 class="text-center text-4xl font-bold text-indigo-500 font-sans leading-9 tracking-tight">Connexion</h1>
 		</div>

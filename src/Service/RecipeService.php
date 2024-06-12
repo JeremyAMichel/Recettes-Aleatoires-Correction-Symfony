@@ -28,6 +28,17 @@ class RecipeService
         return $randomRecipe->toArray();
     }
 
+    public function getRecipeByIdAsArray(int $id): array
+    {
+        $recipe = $this->recipeRepository->find($id);
+
+        if ($recipe === null) {
+            throw new \Exception('Recipe not found');
+        }
+
+        return $recipe->toArray();
+    }
+
     public function createRecipe(array $data)
     {
         $recipe = new Recipe();
