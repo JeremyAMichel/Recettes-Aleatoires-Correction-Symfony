@@ -18,17 +18,20 @@ class RecetteController extends AbstractController
     {
         $recipeId = null;
 
+        // Si la page est rafraîchie, on ne garde pas l'ID de la recette en session
+        if ($request->isMethod('GET') && !$session->getFlashBag()->has('success_feedback')) {
+            $session->remove('recetteId');
+        }
+
         if ($session->get('recetteId') !== null) {
             $recipeId = $session->get('recetteId');
         }
+
 
         try {
             if ($recipeId) {
                 // Charge la recette spécifique sur laquelle l'utilisateur a laissé un feedback
                 $recipe = $recipeService->getRecipeByIdAsArray($recipeId);
-
-
-                // $session->remove('recetteId');
             } else {
                 // Aucun feedback ou ID de recette, charge une recette au hasard
                 $recipe = $recipeService->getRandomRecipeAsArray();
@@ -56,13 +59,13 @@ class RecetteController extends AbstractController
 
             $this->addFlash('success_feedback', 'Votre retour a bien été enregistré !');
 
-            $session->set('recetteId', $recipe['id']);
+            // $session->set('recetteId', $recipe['id']);
 
             // Redirection pour éviter la soumission multiple si l'utilisateur rafraîchit la page
             return $this->redirectToRoute('app_recette');
         }
 
-        // dd($recipeId);
+        $session->set('recetteId', $recipe['id']);
 
         return $this->render('recette/index.html.twig', [
             'controller_name' => 'RecetteController',

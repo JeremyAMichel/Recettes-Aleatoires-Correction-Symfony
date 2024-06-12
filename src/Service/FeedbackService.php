@@ -20,9 +20,10 @@ class FeedbackService
 
     public function createFeedback(array $data)
     {
-        $recipe = $this->entityManager->getRepository(Recipe::class)->find($data['recipe']);
+        // reference to the Recipe entity to avoid loading the whole object
+        $recipeReference = $this->entityManager->getReference(Recipe::class, $data['recipe']);
 
-        if (!$recipe) {
+        if (!$recipeReference) {
             throw new \Exception("Recipe not found");
         }
 
@@ -35,7 +36,7 @@ class FeedbackService
         $feedback = new Feedback();
         $feedback->setComment($data['comment']);
         $feedback->setNote($data['note']);
-        $feedback->setRecipe($recipe);
+        $feedback->setRecipe($recipeReference);
         $feedback->setUser($user);
 
         $this->entityManager->persist($feedback);
