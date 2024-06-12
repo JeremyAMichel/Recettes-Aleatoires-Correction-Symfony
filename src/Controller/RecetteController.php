@@ -26,6 +26,9 @@ class RecetteController extends AbstractController
             if ($recipeId) {
                 // Charge la recette spécifique sur laquelle l'utilisateur a laissé un feedback
                 $recipe = $recipeService->getRecipeByIdAsArray($recipeId);
+
+
+                // $session->remove('recetteId');
             } else {
                 // Aucun feedback ou ID de recette, charge une recette au hasard
                 $recipe = $recipeService->getRandomRecipeAsArray();
@@ -57,10 +60,6 @@ class RecetteController extends AbstractController
 
             // Redirection pour éviter la soumission multiple si l'utilisateur rafraîchit la page
             return $this->redirectToRoute('app_recette');
-        }
-
-        if ($recipeId){
-            $session->remove('recetteId');
         }
 
         // dd($recipeId);
