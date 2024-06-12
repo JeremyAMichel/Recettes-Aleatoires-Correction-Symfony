@@ -9,4 +9,30 @@
 			Vos retours
 		</h1>
 	</div>
+
+	<style>
+		.clamp-8 {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-webkit-line-clamp: 8; /* Nombre de lignes à afficher */
+		}
+	</style>
+
+	<div class="mx-auto max-w-2xl items-center gap-x-8 gap-y-16 px-4 sm:px-6 lg:max-w-7xl lg:grid-cols-2 lg:px-8 mt-14">
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+			{% for feedback in feedbacks %}
+				<div class="p-4 bg-gray-900 hover:bg-gray-800 rounded-lg shadow">
+					<p class="text-lg font-semibold leading-6 text-slate-300 mb-3">{{ feedback.recipe.name }}</p>
+					<hr>
+					<p class="text-sm leading-5 text-slate-400 my-3 break-words clamp-8">{{ feedback.comment }}</p>
+					<p class="text-sm leading-5 text-slate-400">Note :
+						{{ feedback.note }}/5</p>
+				</div>
+			{% else %}
+				<div>Pas de feedback trouvé.</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
