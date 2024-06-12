@@ -140,6 +140,7 @@ class Recipe
     public function toArray(): array
     {
         return [
+            'id'=> $this->getId(),
             'name' => $this->getName(),
             'ingredients' => $this->getIngredients(),
             'preparationTime' => $this->getPreparationTime(),
